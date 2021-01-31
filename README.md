@@ -1,5 +1,5 @@
 # CodOnline-Disected
-A repository dedicated to studying the workings of Call of Duty: Online
+### A repository dedicated to studying the workings of Call of Duty: Online
 
 This repository is an on going work-in-progress and will be updated as I find more information out.
 
@@ -7,7 +7,9 @@ To begin I can __undoubtedly confirm__ that Call of Duty: Online does in fact ma
 
 Knowing already from previous work done on the game it was very easy to predict which port the game would use and no surprise that it would be running on UDP sockets. Making use of Resource Monitor lead me to confirm this by looking at the active TCP connections.
 
-<Picture of Resource Monitor here>
+![ResourceMonitor](https://i.imgur.com/oMmmOmL.png)
+
+![Wireshark](https://i.imgur.com/8HyQWUa.png)
 
 After confirming this the next step was to take a trip on to good ol' Wireshark to start monitoring all the traffic on that port. Sure enough the game makes a connection to the IP 121.51.232.95 and after doing a quick ping to the stun hostname I was able to connect the hostname to that IP.
 
