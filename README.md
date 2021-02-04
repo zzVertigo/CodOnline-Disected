@@ -25,3 +25,10 @@ Anyways, a few other things to keep in mind too is there is a web service as wel
 
 Silly developers...
 
+#### 2021-02-04
+
+I have now had time to work more on the game and discovered that the stun servers aren't as useful as I thought.. from my newest research on it it turns out the client on continously sends packets to it and that's basically it. The real stuff comes in when I began to investigate the LSG and AUTH servers both using the hostname formal-zone-(auth/lsg).codol.qq.com. Both servers make use of 2 servers (one HTTPS and one TCP server listening on port 3074). The client makes a quick connection to the HTTPS server and disconnects right away (probably preventing people from just randomly being able to connect sort of like a barrier before entering the actual LSG/AUTH server) after that the client makes a connection to the AUTH server (not much worth mentioning here) and it sends a few packets. Then we get to the LSG server where actual useful data is sent through like player data and stats alike. The first packet sent through is actually decrypted so it's quite clear that the game makes use of a stream cipher to encrypt data. I haven't been able to identify which crypto the server uses but rest assured it will be solved shortly after IDA finishes its sig scan for references to any cryptography being used. The key is 110% embedded in the client somewhere as the first packet sent actually contains 8 bytes of data that consistently changes on each connection as the data does too.
+
+After that its unclear what the server and client send to each other till I am able to decrypt the data. Regardless, I was able to start at least figuring out the header and so far it seems it uses 4 bytes in the beginning to identify the amount of packet the data contains and after is encrypted data. I can only presume that within that encrypted data exists the true packet header.
+
+More coming soon.
